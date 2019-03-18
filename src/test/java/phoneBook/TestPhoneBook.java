@@ -1,4 +1,4 @@
-package PhoneBook;
+package phoneBook;
 import org.junit.Test;
 
 import java.util.*;
@@ -14,7 +14,7 @@ public class TestPhoneBook {
         testMap.put("Яблоко", new ArrayList<>());
         PhoneBook test = new PhoneBook();
         test.addPerson("Яблоко");
-        assertEquals(testMap, test.phoneBook());
+        assertEquals(testMap, test.getPhoneBook());
         assertThrows(IllegalArgumentException.class, () -> test.addPerson("Яблоко"));
     }
     @Test
@@ -25,7 +25,7 @@ public class TestPhoneBook {
         test.addPerson("Яблоко");
         test.addPerson("Апельсин");
         test.delPerson("Яблоко");
-        assertEquals(testMap, test.phoneBook());
+        assertEquals(testMap, test.getPhoneBook());
         assertThrows(IllegalArgumentException.class, () -> test.delPerson("Яблоко"));
     }
     @Test
@@ -39,9 +39,10 @@ public class TestPhoneBook {
         test.addPerson("Яблоко");
         test.addPerson("Апельсин");
         test.addPhone("Апельсин", "123456");
-        assertEquals(testMap, test.phoneBook());
+        assertEquals(testMap, test.getPhoneBook());
         assertThrows(IllegalArgumentException.class, () -> test.addPhone("Апельсин", "dsfgbs"));
         assertThrows(IllegalArgumentException.class, () -> test.addPhone("Груша", "123456"));
+        assertThrows(IllegalArgumentException.class, () -> test.addPhone("Апельсин", "123456"));
     }
     @Test
     public void delPhoneTest() {
@@ -55,8 +56,10 @@ public class TestPhoneBook {
         test.addPerson("Апельсин");
         test.addPhone("Апельсин", "123456");
         test.delPhone("Апельсин", "123456");
-        assertEquals(testMap, test.phoneBook());
+        assertEquals(testMap, test.getPhoneBook());
         assertThrows(IllegalArgumentException.class, () -> test.delPhone("Апельсин", "dsfgbs"));
+        assertThrows(IllegalArgumentException.class, () -> test.delPhone("Апельсин", "1"));
+        assertThrows(IllegalArgumentException.class, () -> test.delPhone("Груша", "1"));
     }
     @Test
     public void searchPhonesTest() {
